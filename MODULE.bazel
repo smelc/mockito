@@ -16,7 +16,15 @@ maven = use_extension("@rules_jvm_external//:extensions.bzl", "maven")
 # Run `REPIN=1 bazel run @maven//:pin` to repin
 maven.install(
     artifacts = [
+        "net.bytebuddy:byte-buddy:1.17.7",
+        "net.bytebuddy:byte-buddy-agent:1.17.7",
+        "org.objenesis:objenesis:3.3",
     ],
     lock_file = "//:maven_install.json",
 )
+
+maven.artifact(group = "junit", artifact= "junit", version = "4.13.2", neverlink = True)
+maven.artifact(group = "org.hamcrest", artifact= "hamcrest-core", version = "3.0", neverlink = True)
+maven.artifact(group = "org.opentest4j", artifact= "opentest4j", version = "1.3.0", neverlink = True)
+
 use_repo(maven, "maven")
