@@ -31,3 +31,7 @@ classes
 # Used to check reproducibility of Mockito jars
 checksums/
 /.tool-versions
+
+bazel-bin
+bazel-mockito
+bazel-out

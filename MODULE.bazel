@@ -1,0 +1,22 @@
+module(
+    name = "mockito",
+    version = "5.19.0",
+    bazel_compatibility = [">=8.3.0"],
+)
+
+# Causes bazel-bin/external/rules_java+ to be created
+# >=8.15.2 is required to have support for local JVMs ("java.local" below)
+bazel_dep(name = "rules_java", version = "8.15.2")
+
+java = use_extension("@rules_java//java:extensions.bzl", "java_repository")
+
+bazel_dep(name = "rules_jvm_external", version = "6.8")
+
+maven = use_extension("@rules_jvm_external//:extensions.bzl", "maven")
+# Run `REPIN=1 bazel run @maven//:pin` to repin
+maven.install(
+    artifacts = [
+    ],
+    lock_file = "//:maven_install.json",
+)
+use_repo(maven, "maven")
